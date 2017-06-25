@@ -52,10 +52,10 @@ class ParentArray:
     # Input : two nodes inNode1 and inNode2
     # Output : parentArray with parent of node1 changes to parent of node 2
     def union(self, inNode1, inNode2):
-        parentOfNode1 = self.find(inNode1)
-        parentOfNode2 = self.find(inNode2)
+        # parentOfNode1 = self.find(inNode1)
+        # parentOfNode2 = self.find(inNode2)
 
-        self.parentArray[parentOfNode1] = parentOfNode2
+        self.parentArray[inNode1] = inNode2
 
 class ParentArrayMerge:
 
@@ -86,16 +86,13 @@ class ParentArrayMerge:
     # Output : parentArray with parent of either node1 and node2 modified based on the rank of
     # parents
     def union(self,inNode1, inNode2):
-        parentOfNode1 = self.find(inNode1)
-        parentOfNode2 = self.find(inNode2)
-
-        if self.rankArray[parentOfNode1] > self.rankArray[parentOfNode2]:
-            self.parentArray[parentOfNode2] = parentOfNode1
-        elif self.rankArray[parentOfNode2] > self.rankArray[parentOfNode1]:
-            self.parentArray[parentOfNode1] = parentOfNode2
+        if self.rankArray[inNode1] > self.rankArray[inNode2]:
+            self.parentArray[inNode2] = inNode1
+        elif self.rankArray[inNode2] > self.rankArray[inNode1]:
+            self.parentArray[inNode1] = inNode2
         else:
-            self.parentArray[parentOfNode1] = parentOfNode2
-            self.rankArray[parentOfNode2] += 1
+            self.parentArray[inNode1] = inNode2
+            self.rankArray[inNode2] += 1
 
 # constructor template for PathCompression:
 # pathCompression = PathCompression(5)
@@ -128,13 +125,10 @@ class PathCompression:
     # Output : parentArray with parent of either node1 and node2 modified based on the rank of
     # parent
     def union(self, inNode1, inNode2):
-        parentOfNode1 = self.find( inNode1)
-        parentOfNode2 = self.find( inNode2)
-
-        if self.rankArray[parentOfNode1] > self.rankArray[parentOfNode2]:
-            self.parentArray[parentOfNode2] = parentOfNode1
-        elif self.rankArray[parentOfNode2] > self.rankArray[parentOfNode1]:
-            self.parentArray[parentOfNode1] = parentOfNode2
+        if self.rankArray[inNode1] > self.rankArray[inNode2]:
+            self.parentArray[inNode2] = inNode1
+        elif self.rankArray[inNode2] > self.rankArray[inNode1]:
+            self.parentArray[inNode1] = inNode2
         else:
-            self.parentArray[parentOfNode1] = parentOfNode2
-            self.rankArray[parentOfNode2] += 1
+            self.parentArray[inNode1] = inNode2
+            self.rankArray[inNode2] += 1
