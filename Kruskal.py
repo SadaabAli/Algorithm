@@ -4,10 +4,18 @@ from heap import Heap
 
 class Kruskal:
 
+    # constructor template for Kruskal:
+    # kruskal = Kruskal(5,10)
+    # Interpretation:
+    # inNoOfVertices represents the number of vertices in the tree
+    # iNoOfEdges represents the number of edges in the tree which correspond to
+    # the number of elements in the heap.
     def __init__(self, inNoOfVertices, iNoOfEdges):
         self.noOfVertices = inNoOfVertices
         self.tree = Heap(iNoOfEdges)
 
+    # Input : the edges of the tree read from the file
+    # Output : A min heap data stucture inside tree
     def makeTree(self, inEdges):
         for edge in inEdges:
             edge = edge.split()
@@ -16,6 +24,12 @@ class Kruskal:
             weight = int(edge[2])
             self.tree.insert(((src, dest), weight))
 
+    # Input : Mode used to find the Minimum spanning tree:
+    #   If mode == a -> using name Array
+    #   If mode == b -> using parent Array
+    #   If mode == c -> using parent array and weighted merge
+    #   If mode == d -> using parent array, weighted merge and path compression
+    # Output : The edges of the minimum spanning tree.
     def GetMST(self,inMode):
         mst = []
         if inMode == "a":
@@ -43,6 +57,8 @@ class Kruskal:
 
         return mst
 
+# Input : Filename and mode used to form the MST
+# Output : prints the edges of the minimum spanning tree
 def run(inFileName,inMode):
     f = open(inFileName, "r")
     lines = f.readlines()
@@ -53,6 +69,8 @@ def run(inFileName,inMode):
     mst = graph.GetMST(inMode)
     printPath(mst,inMode)
 
+# Input : edges of the minimum spanning tree
+# Output : prints the edges of the minimum spanning tree
 def printPath(inOutput,inMode):
     print "The edges in the minimum spanning tree "
     if inMode == "a":
@@ -67,4 +85,6 @@ def printPath(inOutput,inMode):
         edge = inOutput[i]
         print str(edge[0]) + "-" + str(edge[1])
 
+# Input : Filename and mode used to form MST
+# Output : Runs the Kruskal algorithm to form MST
 run(sys.argv[1],sys.argv[2])
