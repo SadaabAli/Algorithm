@@ -1,5 +1,5 @@
 import sys
-from find_union import NameArray, ParentArray, ParentArrayMerge, PathCompression
+from Find_Union import NameArray, ParentArray, ParentArrayMerge, PathCompression
 from heap import Heap
 
 class Kruskal:
@@ -63,7 +63,7 @@ def run(inFileName, inMode):
   f = open(inFileName, "r")
   lines = f.readlines()
   lines = [x.strip() for x in lines]
-  ver = lines.pop(0)[0]
+  ver = lines.pop(0).strip()
   graph = Kruskal(int(ver), len(lines))
   graph.makeTree(lines)
   mst = graph.GetMST(lines,inMode)

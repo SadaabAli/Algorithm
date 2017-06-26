@@ -142,7 +142,7 @@ class PathCompression:
     # element to its grandparent.
     def find(self, inNode):
         while (inNode != self.parentArray[inNode]):
-            self.parentArray[inNode] = self.find(self.parentArray[inNode])
+            self.parentArray[inNode] = self.parentArray[self.parentArray[inNode]]
             inNode = self.parentArray[inNode]
         return inNode
 
