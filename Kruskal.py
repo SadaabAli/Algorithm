@@ -19,8 +19,8 @@ class Kruskal:
   def makeTree(self, inEdges):
     for edge in inEdges:
       edge = edge.split()
-      src = int(edge[0])
-      dest = int(edge[1])
+      src = edge[0]
+      dest = edge[1]
       weight = int(edge[2])
       self.tree.insert(((src, dest), weight))
 
@@ -30,18 +30,18 @@ class Kruskal:
   #   If mode == c -> using parent array and weighted merge
   #   If mode == d -> using parent array, weighted merge and path compression
   # Output : The edges of the minimum spanning tree.
-  def GetMST(self,inMode):
+  def GetMST(self,iNoOfEdges,inMode):
     mst = []
     if inMode == "a":
-      parentInfo = NameArray(self.noOfVertices)
+      parentInfo = NameArray()
     elif inMode == "b":
-      parentInfo = ParentArray(self.noOfVertices)
+      parentInfo = ParentArray()
     elif inMode == "c":
-      parentInfo = ParentArrayMerge(self.noOfVertices)
+      parentInfo = ParentArrayMerge()
     else:
-      parentInfo = PathCompression(self.noOfVertices)
+      parentInfo = PathCompression()
 
-    parentInfo.makeSet()
+    parentInfo.makeSet(iNoOfEdges)
 
     while len(mst) < self.noOfVertices - 1:
       edge, weight = self.tree.pop()
@@ -66,7 +66,7 @@ def run(inFileName, inMode):
   ver = lines.pop(0)[0]
   graph = Kruskal(int(ver), len(lines))
   graph.makeTree(lines)
-  mst = graph.GetMST(inMode)
+  mst = graph.GetMST(lines,inMode)
   printPath(mst,inMode)
 
 # Input : edges of the minimum spanning tree
